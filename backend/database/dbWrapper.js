@@ -1,7 +1,6 @@
 require('dotenv/config')
-var MongoClient = require('mongodb').MongoClient;
-const client = new MongoClient(process.env.DB_CONNECTION);
-var ObjectId = require('mongodb').ObjectID;
+let mongo = require('mongodb')
+const client = new mongo.MongoClient(process.env.DB_CONNECTION);
 const database = "minimart"
 
 module.exports = {
@@ -19,7 +18,6 @@ module.exports = {
         }
     },
 
-
     insert: async function (collection, data) {
         try {
             // Connect to the MongoDB cluster
@@ -32,5 +30,20 @@ module.exports = {
             // Connect to the MongoDB cluster
             await client.close();
         }
+    },
+
+    delete: async function (collection, data) {
+        try {
+            // Connect to the MongoDB cluster
+            await client.connect();
+            // Make the appropriate DB calls
+            return await client.db(database).collection(collection).deleteOne({ _id: new mongo.ObjectId(data) })
+        } catch (e) {
+            throw e
+        } finally {
+            // Connect to the MongoDB cluster
+            await client.close();
+        }
     }
+
 }

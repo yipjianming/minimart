@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios'
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import BootstrapTable from 'react-bootstrap-table-next';
+import axios from 'axios';
 // import paginationFactory from 'react-bootstrap-table2-paginator';
 // import filterFactory, { textFilter, selectFilter, numberFilter, Comparator } from 'react-bootstrap-table2-filter';
 // import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
@@ -10,17 +9,7 @@ import { Button } from 'react-bootstrap';
 
 
 
-export default function TableView() {
-    const [data, setData] = useState([]);
-    useEffect(() => {
-        async function fetchData() {
-            const result = await axios(`${process.env.REACT_APP_API_URL}/admin/getall`);
-            console.log(result)
-            setData(result.data);
-        }
-        fetchData();
-    }, []);
-
+export default function TableView(props) {
     const columns = [
         // IMAGE COLUMN
         {
@@ -49,26 +38,35 @@ export default function TableView() {
         // PRICE COLUMN
         {
             dataField: 'price',
-            text: 'Price'
+            text: 'Price',
+            style: { textAlign: 'center' },
+            headerStyle: () => { return { width: '100px' } },
+            headerAlign: 'center'
         },
         // CATEGORY COLUMN
         {
             dataField: 'category',
-            text: 'Category'
+            text: 'Category',
+            style: { textAlign: 'center' },
+            headerStyle: () => { return { width: '100px' } },
+            headerAlign: 'center'
         },
         // ACTION COLUMN
         {
+            dataField: 'dummy',
+            isDummyField: true,
             text: 'Action',
             formatter: (cell, row) => {
                 return <><Button className='px-1 pt-0 pb-1 mx-1' variant="outline-dark"><FaEdit /></Button>
-                    <Button className='px-1 pt-0 pb-1 mx-1' variant="outline-dark"><FaTrash /></Button></>
+                    <Button className='px-1 pt-0 pb-1 mx-1' variant="outline-dark"
+                        onClick={() => props.deleteData(row._id)}
+                    ><FaTrash /></Button></>
             },
             style: { textAlign: 'center' },
             headerStyle: () => { return { width: '100px' } },
             headerAlign: 'center'
         }];
-    return <div className='w-75 mx-auto'>
-        <BootstrapTable keyField='id' data={data} columns={columns} />
-    </div>
+    return <BootstrapTable bootstrap4 keyField='_id' data={props.data} columns={columns} />
+
 
 };

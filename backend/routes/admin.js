@@ -18,8 +18,8 @@ router.get('/getAll', async function (req, res, next) {
 router.post('/insert', async function (req, res, next) {
   res.setHeader('Content-Type','application/json')
   try {
-    await db.insert('items', req.body)
-    res.status(constant.http_status.OK).send();
+    let dbRes =await db.insert('items', req.body)
+    res.status(constant.http_status.OK).send(dbRes.insertedId);
   }
   catch (e) {
     res.status(constant.http_status.InternalServerError).send(e.message);
@@ -27,4 +27,17 @@ router.post('/insert', async function (req, res, next) {
 
 });
 
+/* DELETE item from database.  */
+router.delete('/delete', async function (req, res, next) {
+  res.setHeader('Content-Type','application/json')
+  try {
+    console.log(req.body)
+    await db.delete('items', req.body._id)
+    res.status(constant.http_status.OK).send();
+  }
+  catch (e) {
+    res.status(constant.http_status.InternalServerError).send(e.message);
+  }
+
+});
 module.exports = router;

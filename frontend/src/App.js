@@ -1,9 +1,7 @@
 import './App.css';
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import AddItem from './components/Admin/AddItem'
-import TableView from './components/Admin/TableView'
-import ItemList from './components/ItemList'
-import Dashboard from './components/Admin/Dashboard';
+import UserMain from './components/User/Main'
+import AdminMain from './components/Admin/Main';
 
 export default function App() {
   return (
@@ -11,17 +9,11 @@ export default function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/addItem">
-            <AddItem />
-          </Route>
           <Route path="/admin">
-            <Dashboard />
-          </Route>
-          <Route path="/TableView">
-            <TableView />
+            <AdminMain />
           </Route>
           <Route path="/">
-            <ItemList />
+            <UserMain />
           </Route>
         </Switch>
     </Router>
