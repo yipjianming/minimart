@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Spinner, Col, Row, Button } from 'react-bootstrap';
 import axios from 'axios'
 import TableView from './TableView';
@@ -13,7 +13,7 @@ export default function Main() {
     // Data Management for itemList
     // Get All Data
     async function fetchData() {
-        const result = await axios(`${process.env.REACT_APP_API_URL}/admin/getall`).catch(error => {
+        const result = await axios(`/api/getall`).catch(error => {
             console.log(error)
         });
         setData(result.data);
@@ -25,7 +25,7 @@ export default function Main() {
 
     //  Insert Data
     async function insertData(newEntry) {
-        axios.post(`${process.env.REACT_APP_API_URL}/admin/insert`, newEntry)
+        axios.post(`/api/insert`, newEntry)
             .then(res => {
                 newEntry['_id'] = res.data
                 // Redundant step but here due to slow mongoDB Cluster
@@ -47,7 +47,7 @@ export default function Main() {
         newData[dataIndex] = entry
         setData(newData)
         // Real fetch and refresh from DB Cluster
-        axios.put(`${process.env.REACT_APP_API_URL}/admin/update`, entry)
+        axios.put(`/api/update`, entry)
             .then(res => {
                 fetchData()
             })
@@ -65,7 +65,7 @@ export default function Main() {
         });
         setData(newData)
         // Real delete and refresh from DB Cluster
-        axios.delete(`${process.env.REACT_APP_API_URL}/admin/delete`, { data: { _id: deletedId } })
+        axios.delete(`/api/delete`, { data: { _id: deletedId } })
             .then(res => fetchData())
             .catch(error => {
                 console.log(error)

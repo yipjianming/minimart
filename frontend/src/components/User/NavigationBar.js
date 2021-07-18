@@ -1,6 +1,6 @@
 
 import { Navbar } from 'react-bootstrap';
-import { Form, FormControl, InputGroup, Button, Col } from 'react-bootstrap';
+import { Form, FormControl, InputGroup, Col } from 'react-bootstrap';
 
 import customLogo from '../../customLogo.png'
 import IconButton from '@material-ui/core/IconButton';

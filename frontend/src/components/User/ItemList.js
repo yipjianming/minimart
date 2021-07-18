@@ -30,7 +30,7 @@ export default function ItemList(props) {
     // Fetch API on component mount to display to the user
     useEffect(() => {
         async function fetchData() {
-            const result = await axios(`${process.env.REACT_APP_API_URL}/admin/getall`);
+            const result = await axios(`/api/getall`);
             setData(result.data);
             setLoaded(true)
         }

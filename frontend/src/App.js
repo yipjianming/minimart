@@ -9,10 +9,10 @@ export default function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/admin">
+          <Route exact path="/admin">
             <AdminMain />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <UserMain />
           </Route>
         </Switch>

@@ -1,6 +1,6 @@
 import { FaTrash } from 'react-icons/fa';
 import BootstrapTable from 'react-bootstrap-table-next';
-import filterFactory, { textFilter, selectFilter, numberFilter, Comparator } from 'react-bootstrap-table2-filter';
+import filterFactory, { textFilter, selectFilter} from 'react-bootstrap-table2-filter';
 import EditItem from './EditItem';
 import { Button } from 'react-bootstrap';
 
