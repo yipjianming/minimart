@@ -11,6 +11,32 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.toast {
-  opacity: 1 !important;
+
+/* Used in user item list to wrap long names  */
+.text-limit-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+/* Used in admin item list for wrapping of ID, also limits max lines to 4 */
+.wrapword {
+  white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+  white-space: -webkit-pre-wrap;          /* Chrome & Safari */ 
+  white-space: -pre-wrap;                 /* Opera 4-6 */
+  white-space: -o-pre-wrap;               /* Opera 7 */
+  white-space: pre-wrap;                  /* CSS3 */
+  word-wrap: break-word;                  /* Internet Explorer 5.5+ */
+  word-break: break-all;
+  white-space: normal;
+}
+
+.text-limit-4{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* number of lines to show */
+  -webkit-box-orient: vertical;
 }

@@ -2,9 +2,8 @@ import { Button, Modal, Form, Card, InputGroup, FormControl } from 'react-bootst
 import React, { useState } from 'react';
 import placeholderImage from '../../placeholder.jpg'
 import CurrencyInput from 'react-currency-input-field';
-import axios from 'axios'
 
-export default function NewItem(props) {
+export default function InsertItem(props) {
 
     const [show, setShow] = useState(false);
     const [itemImage, setItemImage] = useState(placeholderImage);
@@ -12,8 +11,7 @@ export default function NewItem(props) {
     const [itemPrice, setItemPrice] = useState('');
     const [itemCategory, setItemCategory] = useState('Others');
 
-    const handleShow = () => setShow(true);
-    // Reset State
+    // Reset State (Clear inputs when user hides the modal)
     function resetState() {
         setShow(false)
         setItemImage(placeholderImage)
@@ -21,9 +19,11 @@ export default function NewItem(props) {
         setItemPrice('')
         setItemCategory('Others')
     }
+    const handleShow = () => setShow(true);
     const handleClose = () => {
         resetState()
     };
+    // On submit
     function handleSubmit(e) {
         e.preventDefault();
         setShow(false)
@@ -31,22 +31,15 @@ export default function NewItem(props) {
             name: itemName,
             category: itemCategory,
             image: itemImage,
-            price: parseFloat(itemPrice).toFixed(2)
+            price: parseFloat(itemPrice)
         }
-        axios.post(`${process.env.REACT_APP_API_URL}/admin/insert`, newEntry)
-            .then(res => {
-                resetState();
-                newEntry['_id']=res.data
-                props.insertData(newEntry)
-            }
-            )
-            .catch(error => {
-                console.log(error)
-            })
+        resetState();
+        props.insertData(newEntry)
     }
-
+    // Elements
     return (
         <>
+            {/* Button for user to open Create Item Modal */}
             <Button className='my-1' variant="success" onClick={handleShow}>
                 Add New Item
             </Button>
@@ -106,7 +99,8 @@ export default function NewItem(props) {
                             <InputGroup.Prepend>
                                 <InputGroup.Text id="basic-addon1">Item Category</InputGroup.Text>
                             </InputGroup.Prepend>
-                            <FormControl as='select' onChange={(e) => setItemCategory(e.target.value)} value={itemCategory}>
+                            <FormControl as='select' className='form-select'
+                                onChange={(e) => setItemCategory(e.target.value)} value={itemCategory}>
                                 <option value='Drinks'>Drinks</option>
                                 <option value='Food'>Food</option>
                                 <option value='Fruits'>Fruits</option>
