@@ -1,8 +1,8 @@
 # Minimart
-Jack's Minimart
+```
 User: https://jacks-minimart.herokuapp.com/
 Admin: https://jacks-minimart.herokuapp.com/admin
-
+```
 ## Running Locally
 
 ### Step 1 - Clone minimart app
