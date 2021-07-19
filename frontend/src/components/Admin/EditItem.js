@@ -54,8 +54,8 @@ export default function EditItem(props) {
                         {/* Image View */}
                         <Card.Img style={{ height: '100px', width: 'auto' }} className='mx-auto' variant="top" src={itemImage} />
                         {/* Image Upload */}
-                        <Form.File className="mt-2" custom>
-                            <Form.File.Input accept="image/*" onChange={(e) => {
+                        <InputGroup className="mt-2">
+                            <input type="file" accept="image/*" onChange={(e) => {
                                 const [file] = e.target.files;
                                 if (file) {
                                     const reader = new FileReader();
@@ -66,13 +66,10 @@ export default function EditItem(props) {
                                             var canvas = document.createElement('canvas');
                                             var ctx = canvas.getContext("2d");
                                             var MAX_WIDTH = 125;
-
                                             let newHeight = 100
                                             var width = img.width;
                                             var height = img.height;
                                             let newWidth = Math.min((width / height) * newHeight, MAX_WIDTH)
-
-
                                             canvas.width = newWidth;
                                             canvas.height = newHeight;
                                             ctx.drawImage(img, 0, 0, newWidth, newHeight);
@@ -84,8 +81,8 @@ export default function EditItem(props) {
                                     reader.readAsDataURL(file)
                                 }
                             }
-                            } />
-                        </Form.File>
+                            } required />
+                        </InputGroup>
                         {/* Item Name */}
                         <InputGroup className="mt-2">
                             <InputGroup.Prepend>

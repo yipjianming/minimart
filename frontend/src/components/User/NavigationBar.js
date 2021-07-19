@@ -3,8 +3,7 @@ import { Navbar } from 'react-bootstrap';
 import { Form, FormControl, InputGroup, Col } from 'react-bootstrap';
 
 import customLogo from '../../customLogo.png'
-import IconButton from '@material-ui/core/IconButton';
-import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+import Cart from './Cart';
 export default function NavigationBar(props) {
     return <Navbar className='mx-auto p-0 pb-1' style={{ width: '95%' }} >
         {/* DROPDOWN AND SEARCH BAR */}
@@ -33,7 +32,8 @@ export default function NavigationBar(props) {
         </Form></Col>
         {/* LOGO */}
         <Col xs={4} align="center" ><Navbar.Brand>
-            <img
+            {/* Hidden on smaller device */}
+            <img className='d-none d-lg-block'
                 alt=""
                 src={customLogo}
                 width="200"
@@ -42,15 +42,7 @@ export default function NavigationBar(props) {
         </Navbar.Brand></Col>
         {/* CART*/}
         <Col xs={4} className='mt-auto' align='right' style={{ paddingRight: '20px' }}>
-            <IconButton style={{ color: '#285E37' }}>
-                <ShoppingCartOutlinedIcon fontSize="large" />
-                <span style={{ position: "absolute", right: 3, top: 3, color: '#C70039', fontSize: '1.2rem' }}>
-                    {Object.keys(props.cart).length > 0 ?
-                        // get sum of all item quantity in cart event if they are different item types
-                        Object.values(props.cart).reduce(function (acc, val) { return acc + val; }, 0)
-                        : ''}
-                </span>
-            </IconButton>
+            <Cart data={props.data} cart={props.cart} addToCart={props.addToCart} removeFromCart={props.removeFromCart} />
         </Col>
     </Navbar >
 };

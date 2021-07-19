@@ -1,6 +1,6 @@
 import { FaTrash } from 'react-icons/fa';
 import BootstrapTable from 'react-bootstrap-table-next';
-import filterFactory, { textFilter, selectFilter} from 'react-bootstrap-table2-filter';
+import filterFactory, { textFilter, selectFilter } from 'react-bootstrap-table2-filter';
 import EditItem from './EditItem';
 import { Button } from 'react-bootstrap';
 
@@ -11,10 +11,10 @@ export default function TableView(props) {
         // IMAGE COLUMN
         {
             dataField: 'image',
-            text: 'Image',
+            text: 'Icon',
             formatter: (cell, row) => {
                 return <div className='w-100 mx-auto'>
-                    <img alt='item' style={{ height: '40px', width: 'auto' }} src={cell} className="img-thumbnail mx-auto" />
+                    <img alt='item' style={{ height: '30px', width: 'auto' }} src={cell} className="mx-auto" />
                 </div>;
             },
             style: { textAlign: 'center' },
@@ -24,9 +24,12 @@ export default function TableView(props) {
         {
             dataField: '_id',
             text: 'ID',
-            classes: 'wrapword',
-            style: { textAlign: 'center' },
-            headerStyle: { width: '230px', verticalAlign: 'middle' },
+            style: { textAlign: 'center', },
+            // Only show for large devices and above
+            classes: 'd-none d-lg-block border-bottom-0',
+            headerClasses: 'd-none d-lg-block border-bottom-0',
+            headerStyle: { width: '100%',textAlign: 'center', verticalAlign: 'middle' },
+
         },
         // NAME COLUMN
         {
@@ -41,6 +44,7 @@ export default function TableView(props) {
             dataField: 'price',
             text: 'Price',
             style: { textAlign: 'center' },
+
             headerStyle: { width: '120px', textAlign: 'center', verticalAlign: 'middle' },
             formatter: (cell, row) => {
                 return <span>{cell.toFixed(2)}</span>
@@ -62,7 +66,7 @@ export default function TableView(props) {
             dataField: 'category',
             text: 'Category',
             style: { textAlign: 'center' },
-            headerStyle: { width: '280px', textAlign: 'center', verticalAlign: 'middle' },
+            headerStyle: { textAlign: 'center', verticalAlign: 'middle' },
             filter: selectFilter({
                 options: {
                     'Drinks': 'Drinks',

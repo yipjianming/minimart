@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Spinner, Card } from 'react-bootstrap';
-import axios from 'axios'
 import IconButton from '@material-ui/core/IconButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import AddIcon from '@material-ui/icons/Add';
@@ -23,36 +21,24 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function ItemList(props) {
-    const [data, setData] = useState([]);
-    const [loaded, setLoaded] = useState(false);
-    const classes = useStyles();
-
-    // Fetch API on component mount to display to the user
-    useEffect(() => {
-        async function fetchData() {
-            const result = await axios(`/api/getall`);
-            setData(result.data);
-            setLoaded(true)
-        }
-        fetchData();
-    }, []);
+    const classes = useStyles();    
 
     // Elements
     return <Container style={{ maxWidth: '95%', height: '100%', overflowY: 'auto' }} >
-        {loaded ?
+        {props.loaded ?
             /*Page Loaded*/
             <Row>
                 {/* Filter first by the selected category */}
-                {data.filter(function (item) { return (item.category === props.category || 'All' === props.category) })
+                {props.data.filter(function (item) { return (item.category === props.category || 'All' === props.category) })
                     .filter(function (item) { return (item.name.toLowerCase().includes(props.search.toLowerCase())) })
                     .map(item => {
-                        return <Col xs={2} className="border p-1" style={{ height: '250px' }}>
+                        return <Col xs={6} md={4} lg={2} className="border p-1" style={{ height: '260px' }}>
                             <Card className='w-100 h-100'>
                                 {/* Image for each item */}
                                 <Card.Img style={{ height: '100px', width: 'auto' }} className='mx-auto mt-2' variant="top" src={item.image} />
                                 {/* Name and Price of each item */}
                                 <Card.Body className="d-flex align-items-start flex-column pb-1">
-                                    <h6 className="mb-auto text">{item.name}</h6>
+                                    <h6 className="mb-auto text-limit-2">{item.name}</h6>
                                     <div>S${item.price.toFixed(2)}</div>
                                 </Card.Body>
                                 {/* Buttons for Quantity Management*/}
@@ -61,13 +47,13 @@ export default function ItemList(props) {
                                         <>
                                             <IconButton className={classes.customHoverFocus}
                                                 onClick={() => props.removeFromCart(item._id)} >
-                                                <RemoveIcon fontSize="small" />
+                                                <RemoveIcon style={{fontSize:'10px'}} />
                                             </IconButton>
                                             <span className='my-auto' style={{ textAlign: 'center', width: '100%' }}>
                                                 <strong>{props.cart[item._id]}</strong></span>
                                             <IconButton className={classes.customHoverFocus}
                                                 onClick={() => props.addToCart(item._id)} >
-                                                <AddIcon fontSize="small" />
+                                                <AddIcon style={{fontSize:'10px'}} />
                                             </IconButton>
                                         </>
                                         : <Button style={{ width: '100%', textTransform: 'none' }}

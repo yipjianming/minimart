@@ -40,3 +40,16 @@ code {
   -webkit-line-clamp: 4; /* number of lines to show */
   -webkit-box-orient: vertical;
 }
+
+.text-limit-2{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+.react-bootstrap-table table { table-layout: auto !important; }
+
+.popover{
+  max-width: 100%; /* Max Width of the popover (depending on the container!) */
+}

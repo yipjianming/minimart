@@ -78,9 +78,9 @@ export default function Main() {
                 {/* Create New Item */}
                 <Col xs={4} className='mt-auto'><InsertItem insertData={insertData} /></Col>
                 {/* Logo*/}
-                <Col xs={4} align='center'><img alt="" src={customLogo} width="200" height="100" /></Col>
+                <Col xs={4} align='center'><img className='d-none d-lg-block' alt="" src={customLogo} width="200" height="100" /></Col>
             </Row>
-            <div style={{ height: '100%', overflowY: 'auto' }}>
+            <div style={{ height: '100%', width:'100%', overflowX:'auto', overflowY: 'auto' }}>
                 {/* Table List View*/}
                 <TableView deleteData={deleteData} editData={editData} data={data} />
             </div>
