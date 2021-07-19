@@ -70,3 +70,9 @@ Additional Objectives
 - [x] Extra points for usage of database wrapper – ORM (backend)
 - [ ] Usage of container technologies such as Dockers or Kubernetes
 - [ ] Usage of cloud technologies such as AWS, GCP or Azure (Deployed to Heroku and using MongoDB Atlas cloud database
+
+What Could have been done better
+ 1. Using Redux for state management (in the process of picking this up)
+ 2. Using less inline styles
+ 3. Mobile responsiveness needs to be improved
+
